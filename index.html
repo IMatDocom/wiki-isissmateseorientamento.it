@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="it" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archivio Digitale ISISS Matese</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            850: '#151f32',
+                            900: '#0f172a',
+                            950: '#020617',
+                        }
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px -5px rgba(59, 130, 246, 0.5)',
+                        'glow-hover': '0 0 30px -5px rgba(59, 130, 246, 0.7)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #020617; /* Slate 950 */
+            color: #f8fafc;
+        }
+
+        /* Sfondo Tecnologico */
+        .bg-grid-pattern {
+            background-image: linear-gradient(to right, #1e293b 1px, transparent 1px),
+                              linear-gradient(to bottom, #1e293b 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+            opacity: 0.2;
+        }
+        
+        /* Dark Glassmorphism */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6); /* Slate 900 con opacità */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            background: rgba(30, 41, 59, 0.7);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 0 30px -10px rgba(59, 130, 246, 0.15);
+        }
+
+        .glass-card:hover::before {
+            opacity: 1;
+        }
+
+        .hidden-section { display: none; }
+        
+        .fade-in {
+            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Input Styling */
+        .custom-input:focus {
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+    </style>
+</head>
+<body class="min-h-screen relative overflow-x-hidden selection:bg-blue-500/30 selection:text-blue-200">
+
+    <!-- Background Decoration -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="absolute inset-0 bg-grid-pattern"></div>
+        <!-- Glow effects -->
+        <div class="absolute top-[-20%] left-[20%] w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[100px]"></div>
+        <div class="absolute bottom-[-10%] right-[10%] w-[400px] h-[400px] bg-indigo-600/10 rounded-full blur-[100px]"></div>
+    </div>
+
+    <!-- LOGIN SECTION -->
+    <div id="login-section" class="relative z-10 min-h-screen flex items-center justify-center p-4">
+        <div class="glass-panel p-10 rounded-3xl shadow-2xl max-w-md w-full text-center fade-in border border-white/5">
+            
+            <!-- Logo & Icon Container -->
+            <div class="mb-10 flex items-center justify-center gap-6">
+                <!-- Logo Image -->
+                <div class="relative group">
+                    <div class="absolute -inset-2 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full opacity-20 group-hover:opacity-40 blur-md transition-opacity"></div>
+                    <img src="https://lh7-us.googleusercontent.com/slidesz/AGV_vUdR1ztLGBQVAC5jffCwT0f8rklq_Oe1vKtOyJxyYRCSzSAB-tl66FcF6tOjyGfR78b-Wy5H8DCH6QJ4MqFUSW9z4ozKj8g-Lc49JN5AgGPvM0by4ZJJxukrQU3Jh3_X1MnLK2DbV9Xan9NFMzJ-UR9RsjiH3bHu=s2048?key=4ZJENVP1dKnMhNXSjX0yOw" alt="Logo ISISS" class="relative w-20 h-20 object-contain drop-shadow-lg">
+                </div>
+
+                <!-- Vertical Divider -->
+                <div class="h-16 w-px bg-gradient-to-b from-transparent via-slate-500/50 to-transparent"></div>
+
+                <!-- Fingerprint Icon -->
+                <div class="relative">
+                    <div class="absolute inset-0 bg-blue-500 blur-xl opacity-20 rounded-full"></div>
+                    <div class="relative bg-slate-900 border border-white/10 p-4 rounded-2xl text-blue-400 shadow-lg">
+                        <i data-lucide="fingerprint" class="w-8 h-8"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <h1 class="text-3xl font-bold mb-2 text-white tracking-tight">Accesso Riservato</h1>
+            <p class="text-slate-400 mb-8 text-sm">Archivio Digitale Progetti ITI ISISS Matese</p>
+            
+            <form onsubmit="handleLogin(event)" class="space-y-6">
+                <div class="relative group text-left">
+                    <label class="text-xs font-semibold text-slate-500 uppercase tracking-wider ml-1 mb-2 block">Password di Sicurezza</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500 group-focus-within:text-blue-400 transition-colors">
+                            <i data-lucide="lock" class="w-4 h-4"></i>
+                        </div>
+                        <input type="password" id="passwordInput" 
+                            class="custom-input w-full pl-11 pr-4 py-3.5 bg-slate-950/50 border border-slate-700/50 rounded-xl focus:outline-none focus:border-blue-500/50 text-slate-200 placeholder-slate-600 transition-all font-medium"
+                            placeholder="••••••••••••" required>
+                    </div>
+                </div>
+                
+                <div id="errorMessage" class="flex items-center justify-center gap-2 text-red-400 text-xs font-medium h-5 opacity-0 transition-opacity">
+                    <i data-lucide="alert-triangle" class="w-3 h-3"></i>
+                    <span>Codice di accesso errato</span>
+                </div>
+
+                <button type="submit" 
+                    class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3.5 px-6 rounded-xl shadow-glow hover:shadow-glow-hover transition-all duration-300 flex items-center justify-center gap-2 group">
+                    <span>Accedi al Database</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- WIKI CONTENT SECTION -->
+    <div id="wiki-section" class="relative z-10 min-h-screen hidden-section flex flex-col">
+        
+        <!-- Navbar -->
+        <nav class="glass-panel sticky top-0 z-50 border-b border-white/5 px-6 py-4">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <div class="flex items-center gap-4">
+                    <!-- Updated Navbar Logo -->
+                    <div class="bg-gradient-to-br from-blue-600/20 to-indigo-600/20 p-1.5 rounded-xl border border-white/5">
+                        <img src="https://lh7-us.googleusercontent.com/slidesz/AGV_vUdR1ztLGBQVAC5jffCwT0f8rklq_Oe1vKtOyJxyYRCSzSAB-tl66FcF6tOjyGfR78b-Wy5H8DCH6QJ4MqFUSW9z4ozKj8g-Lc49JN5AgGPvM0by4ZJJxukrQU3Jh3_X1MnLK2DbV9Xan9NFMzJ-UR9RsjiH3bHu=s2048?key=4ZJENVP1dKnMhNXSjX0yOw" alt="Logo ISISS" class="w-8 h-8 object-contain">
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-lg leading-tight text-white tracking-tight">Wiki ISISS</h1>
+                        <p class="text-[10px] text-blue-400 font-semibold tracking-widest uppercase">Archivio Orientamento</p>
+                    </div>
+                </div>
+                <button onclick="logout()" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800/50 hover:bg-slate-800 border border-white/5 text-slate-400 hover:text-white transition-all text-sm font-medium">
+                    <i data-lucide="log-out" class="w-4 h-4"></i>
+                    <span class="hidden sm:inline">Logout</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 py-16 w-full">
+            
+            <!-- Header Section Centered -->
+            <div class="flex flex-col items-center text-center mb-16 fade-in max-w-4xl mx-auto">
+                <div class="flex items-center justify-center gap-3 mb-6">
+                    <span class="px-3 py-1 bg-blue-500/10 border border-blue-500/20 text-blue-400 rounded-full text-xs font-bold tracking-wider uppercase">
+                        Anno Scolastico 2024/25
+                    </span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight leading-tight">
+                    Archivio Progetti <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Orientamento ITI</span>
+                </h2>
+                <p class="text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto">
+                    Piattaforma centralizzata per la consultazione e la gestione dei lavori realizzati dagli studenti.
+                    Uno showcase tecnologico per l'offerta formativa dell'istituto.
+                </p>
+            </div>
+
+            <!-- Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1 -->
+                <article class="glass-card rounded-2xl p-7 flex flex-col h-full fade-in group" style="animation-delay: 0.1s;">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="p-3 bg-slate-800/50 rounded-xl text-blue-400 border border-white/5 group-hover:border-blue-500/30 transition-colors">
+                            <i data-lucide="car" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-xs font-mono text-slate-500">ID: PRJ-01</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">Gioco di Auto</h3>
+                    <p class="text-slate-400 text-sm mb-8 leading-relaxed">
+                        Un videogioco di guida automobilistica interattivo progettato per l'orientamento. Sfreccia tra le domande e scopri il tuo percorso.
+                    </p>
+                    
+                    <div class="mt-auto border-t border-white/5 pt-6">
+                        <span class="text-xs text-slate-500 uppercase font-semibold block mb-3">Sviluppato da:</span>
+                        <div class="flex flex-col gap-3 mb-5">
+                            <div class="flex items-center gap-3">
+                                <img src="https://ui-avatars.com/api/?name=Villani+Sisto&background=1e293b&color=94a3b8" class="w-8 h-8 rounded-full border border-slate-700" alt="VS">
+                                <span class="text-sm font-medium text-slate-300">Villani Sisto</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <img src="https://ui-avatars.com/api/?name=Fiondella+Francescopio&background=1e293b&color=94a3b8" class="w-8 h-8 rounded-full border border-slate-700" alt="FF">
+                                <span class="text-sm font-medium text-slate-300">Fiondella Francescopio</span>
+                            </div>
+                            <div class="mt-1">
+                                <span class="text-xs font-semibold text-slate-500 bg-slate-900/50 px-2 py-1 rounded w-fit">4BI ITI</span>
+                            </div>
+                        </div>
+                        
+                        <a href="https://gioco.isissmateseorientamento.it/" target="_blank" class="flex items-center justify-between w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-xl text-sm font-medium transition-all shadow-lg shadow-blue-900/20 hover:shadow-blue-500/20">
+                            <span>Avvia Simulazione</span>
+                            <i data-lucide="play" class="w-4 h-4 fill-current"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="glass-card rounded-2xl p-7 flex flex-col h-full fade-in group" style="animation-delay: 0.2s;">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="p-3 bg-slate-800/50 rounded-xl text-purple-400 border border-white/5 group-hover:border-purple-500/30 transition-colors">
+                            <i data-lucide="trophy" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-xs font-mono text-slate-500">ID: PRJ-02</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">Web App Calcio</h3>
+                    <p class="text-slate-400 text-sm mb-8 leading-relaxed">
+                        Sito web dimostrativo dedicato alla passione per il calcio e alla squadra del Napoli, creato per mostrare le competenze di Web Design.
+                    </p>
+                    
+                    <div class="mt-auto border-t border-white/5 pt-6">
+                        <span class="text-xs text-slate-500 uppercase font-semibold block mb-3">Sviluppato da:</span>
+                        <div class="flex flex-col gap-3 mb-5">
+                            <div class="flex items-center gap-3">
+                                <img src="https://ui-avatars.com/api/?name=Enrico+Pio+Guarniero&background=1e293b&color=94a3b8" class="w-8 h-8 rounded-full border border-slate-700" alt="EG">
+                                <span class="text-sm font-medium text-slate-300">Enrico Pio Guarniero</span>
+                            </div>
+                            <div class="mt-1">
+                                <span class="text-xs font-semibold text-slate-500 bg-slate-900/50 px-2 py-1 rounded w-fit">4BI ITI</span>
+                            </div>
+                        </div>
+                        
+                        <a href="https://prog2.isissmateseorientamento.it/" target="_blank" class="flex items-center justify-between w-full py-3 px-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-xl text-sm font-medium transition-all shadow-lg shadow-purple-900/20 hover:shadow-purple-500/20">
+                            <span>Avvia Simulazione</span>
+                            <i data-lucide="play" class="w-4 h-4 fill-current"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="glass-card rounded-2xl p-7 flex flex-col h-full fade-in group" style="animation-delay: 0.3s;">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="p-3 bg-slate-800/50 rounded-xl text-emerald-400 border border-white/5 group-hover:border-emerald-500/30 transition-colors">
+                            <i data-lucide="gamepad-2" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-xs font-mono text-slate-500">ID: PRJ-03</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">Videogame 3D</h3>
+                    <p class="text-slate-400 text-sm mb-8 leading-relaxed">
+                        Esperienza interattiva completa. Un videogioco didattico sviluppato per l'Open Day e l'orientamento in ingresso.
+                    </p>
+                    
+                    <div class="mt-auto border-t border-white/5 pt-6">
+                        <span class="text-xs text-slate-500 uppercase font-semibold block mb-3">Sviluppato da:</span>
+                        <div class="flex flex-col gap-3 mb-5">
+                            <div class="flex items-center gap-3">
+                                <img src="https://ui-avatars.com/api/?name=Fiondella+Francescopio&background=1e293b&color=94a3b8" class="w-8 h-8 rounded-full border border-slate-700" alt="FF">
+                                <span class="text-sm font-medium text-slate-300">Fiondella Francescopio</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <img src="https://ui-avatars.com/api/?name=Villani+Sisto&background=1e293b&color=94a3b8" class="w-8 h-8 rounded-full border border-slate-700" alt="VS">
+                                <span class="text-sm font-medium text-slate-300">Villani Sisto</span>
+                            </div>
+                            <div class="mt-1">
+                                <span class="text-xs font-semibold text-slate-500 bg-slate-900/50 px-2 py-1 rounded w-fit">Indirizzo ITI</span>
+                            </div>
+                        </div>
+                        
+                        <a href="https://prog3.isissmateseorientamento.it/" target="_blank" class="flex items-center justify-between w-full py-3 px-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl text-sm font-medium transition-all shadow-lg shadow-emerald-900/20 hover:shadow-emerald-500/20">
+                            <span>Avvia Simulazione</span>
+                            <i data-lucide="play" class="w-4 h-4 fill-current"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Card 4 (New) -->
+                <article class="glass-card rounded-2xl p-7 flex flex-col h-full fade-in group" style="animation-delay: 0.4s;">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="p-3 bg-slate-800/50 rounded-xl text-rose-400 border border-white/5 group-hover:border-rose-500/30 transition-colors">
+                            <i data-lucide="heart-handshake" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-xs font-mono text-slate-500">ID: PRJ-04</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-rose-400 transition-colors">Non Sei Sola</h3>
+                    <p class="text-slate-400 text-sm mb-8 leading-relaxed">
+                        Sito web contro la violenza sulle donne. Una piattaforma di sensibilizzazione e supporto per la comunità.
+                    </p>
+                    
+                    <div class="mt-auto border-t border-white/5 pt-6">
+                        <span class="text-xs text-slate-500 uppercase font-semibold block mb-3">Sviluppato da:</span>
+                        <div class="flex flex-col gap-3 mb-5">
+                            <div class="flex items-center gap-3">
+                                <img src="https://ui-avatars.com/api/?name=Vari+Studenti&background=1e293b&color=94a3b8" class="w-8 h-8 rounded-full border border-slate-700" alt="VS">
+                                <span class="text-sm font-medium text-slate-300">Vari Studenti</span>
+                            </div>
+                            <div class="mt-1">
+                                <span class="text-xs font-semibold text-slate-500 bg-slate-900/50 px-2 py-1 rounded w-fit">Progetto Collettivo</span>
+                            </div>
+                        </div>
+                        
+                        <a href="https://nonseisolapiedimonte.altervista.org" target="_blank" class="flex items-center justify-between w-full py-3 px-4 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white rounded-xl text-sm font-medium transition-all shadow-lg shadow-rose-900/20 hover:shadow-rose-500/20">
+                            <span>Visita Sito</span>
+                            <i data-lucide="external-link" class="w-4 h-4 fill-current"></i>
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </main>
+        
+        <footer class="border-t border-white/5 bg-slate-900/30 backdrop-blur-sm mt-auto">
+            <div class="max-w-7xl mx-auto py-8 px-4 flex flex-col justify-center items-center text-center gap-4 text-sm">
+                <div class="text-slate-500">
+                    &copy; 2025 <span class="text-slate-300 font-medium">ISISS Matese</span>. Tutti i diritti riservati.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const CORRECT_PASS = "wikiisiss1";
+        const loginSection = document.getElementById('login-section');
+        const wikiSection = document.getElementById('wiki-section');
+        const errorMsg = document.getElementById('errorMessage');
+        const passInput = document.getElementById('passwordInput');
+
+        if (sessionStorage.getItem('isiss_auth') === 'true') {
+            showWiki();
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const inputVal = passInput.value;
+
+            if (inputVal === CORRECT_PASS) {
+                sessionStorage.setItem('isiss_auth', 'true');
+                errorMsg.style.opacity = '0';
+                // Effetto "Successo" prima di mostrare il contenuto
+                const btn = e.target.querySelector('button');
+                btn.innerHTML = `<i data-lucide="check" class="w-5 h-5"></i> Accesso Consentito`;
+                btn.classList.remove('bg-blue-600', 'hover:bg-blue-500');
+                btn.classList.add('bg-emerald-500');
+                lucide.createIcons();
+                
+                setTimeout(() => {
+                    showWiki();
+                }, 600);
+            } else {
+                errorMsg.style.opacity = '1';
+                passInput.value = '';
+                passInput.focus();
+                passInput.classList.add('border-red-500/50', 'ring-1', 'ring-red-500/50');
+                
+                setTimeout(() => {
+                    passInput.classList.remove('border-red-500/50', 'ring-1', 'ring-red-500/50');
+                }, 500);
+            }
+        }
+
+        function showWiki() {
+            loginSection.style.display = 'none';
+            wikiSection.classList.remove('hidden-section');
+            lucide.createIcons();
+        }
+
+        function logout() {
+            sessionStorage.removeItem('isiss_auth');
+            location.reload();
+        }
+    </script>
+</body>
+</html>
